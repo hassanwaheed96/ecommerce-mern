@@ -1,20 +1,13 @@
 import "./App.css";
-import React, { createContext, useState } from "react";
-import Home from "./components/home/home";
-import {Products} from "./components/products/products";
-import { Route, Routes } from "react-router-dom";
-import { Cart } from "./components/cart/cart";
-
-export const GetData = createContext()
+import React from "react";
+import { Layout } from "./components/Layout/Layout";
 
 function App() {
-  const [count, setCount] = useState(0)
-  const [product, setProduct] = useState([]);
-
-
   return (
     <>
-    <h1>Helloooo</h1>
+      <Layout>
+        <h1>Ecommerce app</h1>
+      </Layout>
     </>
   );
 }
