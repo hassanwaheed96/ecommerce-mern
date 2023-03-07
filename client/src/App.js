@@ -9,6 +9,9 @@ import Policy from "./pages/Policy";
 import { Layout } from "./components/Layout/Layout";
 import { Helmet } from "react-helmet";
 import Register from "./pages/auth/Register";
+import Login from "./pages/auth/Login";
+import Dashboard from "./pages/user/Dashboard";
+import PrivateRoute from "./components/Routes/Private";
 
 // function App({ title, description, keywords, author }) {
 function App() {
@@ -24,8 +27,12 @@ function App() {
         </Helmet> */}
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/dashboard" element={<PrivateRoute />}>
+          <Route path="" element={<Dashboard />} />
+        </Route>
         <Route path="/about" element={<About />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/policy" element={<Policy />} />
         <Route path="*" element={<Pagenotfound />} />
