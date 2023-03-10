@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Layout } from "../../components/Layout/Layout";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/auth";
 
 const Login = () => {
@@ -11,6 +11,7 @@ const Login = () => {
   const [auth, setAuth] = useAuth();
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -23,6 +24,7 @@ const Login = () => {
       toast.success(res.data.success);
       setAuth({ ...auth, user: res.data.user, token: res.data.token });
       localStorage.setItem("auth", JSON.stringify(res.data));
+      console.log("Location pathname: ", location.pathname);
       navigate("/");
     } catch (error) {
       console.log("Error: ", error);
