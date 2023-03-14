@@ -37,6 +37,16 @@ export const Header = () => {
                 <>
                   <li className="nav-item">
                     <NavLink
+                      to={`/dashboard/${
+                        auth?.user?.role === 1 ? "admin" : "user"
+                      }`}
+                      className="nav-link"
+                    >
+                      Dashboard
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink
                       onClick={logoutHandler}
                       to="/login"
                       className="nav-link"

@@ -1,17 +1,17 @@
 import React from "react";
 import { Layout } from "../../components/Layout/Layout";
-import UserMenu from "../../components/Layout/UserMenu";
+import AdminMenu from "../../components/Layout/AdminMenu";
 import { useAuth } from "../../context/auth";
 
-const Dashboard = () => {
-  const [auth] = useAuth();
+const AdminDashboard = () => {
+  const [auth] = useAuth("");
   return (
-    <Layout title={"Dashboard"}>
-      <h1>User Dashboard</h1>
+    <Layout>
+      <h1>Admin Dashboard</h1>
       <div className="container-fluid m-3 p-3">
         <div className="row">
           <div className="col-md-3">
-            <UserMenu />
+            <AdminMenu />
           </div>
           <div className="col-md-9">
             <div className="card w-50">
@@ -30,4 +30,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default AdminDashboard;

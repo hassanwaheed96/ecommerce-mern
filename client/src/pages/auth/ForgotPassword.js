@@ -5,9 +5,10 @@ import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/auth";
 
-const Login = () => {
+const ForgotPassword = () => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [answer, setAnswer] = useState("");
   const [auth, setAuth] = useAuth();
 
   const navigate = useNavigate();
@@ -16,18 +17,18 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`http://localhost:8080/api/v1/auth/login`, {
-        email,
-        password,
-      });
+      const res = await axios.post(
+        `http://localhost:8080/api/v1/auth/forgot-password`,
+        {
+          email,
+          newPassword,
+          answer,
+        }
+      );
       console.log("RES: ", res);
       toast.success(res.data.success);
-      setAuth({ ...auth, user: res.data.user, token: res.data.token });
-      localStorage.setItem("auth", JSON.stringify(res.data));
-      console.log("Location pathname: ", location.pathname);
-      navigate(location.state || "/");
+      navigate("/login");
     } catch (error) {
-      console.log("Error: ", error);
       toast.error("Something went wrong");
     }
   };
@@ -35,7 +36,7 @@ const Login = () => {
   return (
     <>
       <Layout title={"Ecommerce - Register"}>
-        <div>Register</div>
+        <div>Reset Password</div>
         <form onSubmit={handleLogin}>
           <div>
             <div className="mb-3">
@@ -52,23 +53,28 @@ const Login = () => {
             </div>
             <div className="mb-3">
               <label htmlFor="exampleInputPassword1" className="form-label">
-                Password
+                Security Answer
               </label>
               <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                type="text"
+                value={answer}
+                onChange={(e) => setAnswer(e.target.value)}
                 className="form-control"
                 id="exampleInputPassword1"
               />
             </div>
-            <button
-              type="button"
-              onClick={() => navigate("/forgot-password")}
-              className="btn btn-primary"
-            >
-              Forgot Password
-            </button>
+            <div className="mb-3">
+              <label htmlFor="exampleInputPassword1" className="form-label">
+                New Password
+              </label>
+              <input
+                type="password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                className="form-control"
+                id="exampleInputPassword1"
+              />
+            </div>
             <button type="submit" className="btn btn-primary">
               Submit
             </button>
@@ -79,4 +85,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ForgotPassword;
