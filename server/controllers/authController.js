@@ -1,8 +1,11 @@
-const userModel = require("../models/userModel");
-const { hashPassword, comparePassword } = require("../helpers/authHelper");
-const JWT = require("jsonwebtoken");
+// const userModel = require("../models/userModel");
+// const { hashPassword, comparePassword } = require("../helpers/authHelper");
+// const JWT = require("jsonwebtoken");
+import userModel from "../models/userModel.js";
+import { hashPassword, comparePassword } from "../helpers/authHelper.js";
+import JWT from "jsonwebtoken";
 
-const registerController = async (req, res) => {
+export const registerController = async (req, res) => {
   try {
     const { name, email, password, phone, address, answer } = req.body;
     if (!name) return res.send({ error: "Name is required" });
@@ -48,7 +51,7 @@ const registerController = async (req, res) => {
   }
 };
 
-const loginController = async (req, res) => {
+export const loginController = async (req, res) => {
   try {
     const { email, password } = req.body;
     if (!email || !password) {
@@ -103,7 +106,7 @@ const loginController = async (req, res) => {
   }
 };
 
-const forgotPasswordController = async (req, res) => {
+export const forgotPasswordController = async (req, res) => {
   try {
     const { email, answer, newPassword } = req.body;
     if (!email) res.status(400).send({ message: "Email is required" });
@@ -137,14 +140,7 @@ const forgotPasswordController = async (req, res) => {
   }
 };
 
-const testController = (req, res) => {
+export const testController = (req, res) => {
   console.log("Protected route works");
   res.send("Protected route works");
-};
-
-module.exports = {
-  registerController,
-  loginController,
-  testController,
-  forgotPasswordController,
 };
