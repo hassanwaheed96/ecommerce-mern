@@ -4,6 +4,7 @@ import {
   deleteProductController,
   getProductController,
   getSingleProductController,
+  productPhotoController,
   updateProductController,
 } from "../controllers/productController.js";
 import { isAdmin, requireSignIn } from "../middleware/authMiddleware.js";
@@ -29,7 +30,7 @@ router.get("/single-product/:slug", getSingleProductController);
 
 // update product
 router.put(
-  "/update-product",
+  "/update-product/:id",
   requireSignIn,
   isAdmin,
   formidable(),
@@ -37,12 +38,15 @@ router.put(
 );
 
 // delete product
-router.put(
-  "/delete-product",
+router.delete(
+  "/delete-product/:id",
   requireSignIn,
   isAdmin,
   formidable(),
   deleteProductController
 );
+
+// get photo
+router.get("/product-photo/:pid", productPhotoController);
 
 export default router;
