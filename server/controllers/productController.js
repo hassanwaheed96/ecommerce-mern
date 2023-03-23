@@ -157,6 +157,7 @@ export const deleteProductController = async (req, res) => {
   }
 };
 
+// get product photo
 export const productPhotoController = async (req, res) => {
   try {
     const product = await productModel.findById(req.params.pid).select("photo");

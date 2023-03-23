@@ -39,7 +39,7 @@ router.put(
 );
 
 // get category
-router.get("/get-categori", getCategoryController);
+router.get("/get-category", getCategoryController);
 
 // get one category
 router.get("/get-single-category/:slug", getSingleCategoryController);
